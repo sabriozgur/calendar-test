@@ -23,10 +23,22 @@ function CalendarDay({ date, activeDate, setActive }: CalendarDayProps) {
   });
 
   return (
-    <div className={className} onClick={() => setActive(date)}>
-      <p>{dayName}</p>
-      <p>{dayOfMonth}</p>
-    </div>
+      <CalendarDayDumb
+          className={className}
+          date={date}
+          dayName={dayName}
+          dayOfMonth={dayOfMonth}
+          setActive={setActive}
+      />
+  );
+}
+
+function CalendarDayDumb({ className, date, dayName, dayOfMonth, setActive }: any) {
+  return (
+      <div className={className} onClick={() => setActive(date)}>
+        <p>{dayName}</p>
+        <p>{dayOfMonth}</p>
+      </div>
   );
 }
 
@@ -63,16 +75,27 @@ function Calendar({ inputDate }: CalendarProps) {
     );
   }
   return (
-    <div className="calendar">
-      <h1>{moment(date).format("MMMM")}</h1>
-      <tbody>{days}</tbody>
-      <button className="button next" onClick={goToNextWeek}>
-        Next
-      </button>
-      <button className="button prev" onClick={goToPreviousWeek}>
-        Prev
-      </button>
-    </div>
+      <CalendarDumb
+          date={date}
+          days={days}
+          goToNextWeek={goToNextWeek}
+          goToPreviousWeek={goToPreviousWeek}
+      />
+  );
+}
+
+function CalendarDumb({ date, days, goToNextWeek, goToPreviousWeek }: any) {
+  return (
+      <div className="calendar">
+        <h1>{moment(date).format("MMMM")}</h1>
+        <tbody>{days}</tbody>
+        <button className="button next" onClick={goToNextWeek}>
+          Next
+        </button>
+        <button className="button prev" onClick={goToPreviousWeek}>
+          Prev
+        </button>
+      </div>
   );
 }
 
