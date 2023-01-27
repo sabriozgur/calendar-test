@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {SetStateAction, useState} from "react";
 import "./styles.css";
 import moment from "moment";
 import clsx from "clsx";
@@ -32,7 +32,8 @@ function CalendarDay({ date, activeDate, setActive }: CalendarDayProps) {
 
 function Calendar({ inputDate }: CalendarProps) {
   const [date, setDate] = useState(inputDate);
-  const [activeDate, setActiveDate] = useState(undefined);
+  // TODO fix here cant define null because of lots of typescript errors
+  const [activeDate, setActiveDate] = useState(moment("1970-01-01 16:00Z"));
 
   function goToNextWeek() {
     setDate(moment(date).add(7, "days"));
@@ -42,7 +43,7 @@ function Calendar({ inputDate }: CalendarProps) {
     setDate(moment(date).add(-7, "days"));
   }
 
-  function setActive(date: moment.Moment | undefined) {
+  function setActive(date: moment.Moment) {
     // TODO fix this type warning useState undefined??
     setActiveDate(date);
   }
