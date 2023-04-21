@@ -87,14 +87,19 @@ function Calendar({ inputDate }: CalendarProps) {
 function CalendarDumb({ date, days, goToNextWeek, goToPreviousWeek }: any) {
   return (
       <div className="calendar">
-        <h1>{moment(date).format("MMMM")}</h1>
-        <tbody>{days}</tbody>
-        <button className="button next" onClick={goToNextWeek}>
+        <div className="calendar-top-bar">
+        <button className="button button-align" onClick={goToPreviousWeek}>
+            Prev
+        </button>
+            <h1 className="button-align">{moment(date).format("MMMM")}</h1>
+        <button className="button button-align" onClick={goToNextWeek}>
           Next
         </button>
-        <button className="button prev" onClick={goToPreviousWeek}>
-          Prev
-        </button>
+        </div>
+        <div className="calendar-bottom-bar">
+            {days}
+        </div>
+
       </div>
   );
 }
